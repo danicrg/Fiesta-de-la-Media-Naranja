@@ -12,6 +12,7 @@
 		6F2F06D7216F5DD700AA5369 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F06D5216F5DD700AA5369 /* Main.storyboard */; };
 		6F2F06D9216F5DD900AA5369 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F06D8216F5DD900AA5369 /* Assets.xcassets */; };
 		6F2F06DC216F5DD900AA5369 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F06DA216F5DD900AA5369 /* LaunchScreen.storyboard */; };
+		6FA34FB02175DA8400A16440 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA34FAF2175DA8400A16440 /* DateViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		6F2F06D8216F5DD900AA5369 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F2F06DB216F5DD900AA5369 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F2F06DD216F5DD900AA5369 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FA34FAF2175DA8400A16440 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				6F2F06D1216F5DD700AA5369 /* AppDelegate.swift */,
 				6F2F06D3216F5DD700AA5369 /* ViewController.swift */,
+				6FA34FAF2175DA8400A16440 /* DateViewController.swift */,
 				6F2F06D5216F5DD700AA5369 /* Main.storyboard */,
 				6F2F06D8216F5DD900AA5369 /* Assets.xcassets */,
 				6F2F06DA216F5DD900AA5369 /* LaunchScreen.storyboard */,
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F2F06D4216F5DD700AA5369 /* ViewController.swift in Sources */,
+				6FA34FB02175DA8400A16440 /* DateViewController.swift in Sources */,
 				6F2F06D2216F5DD700AA5369 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,7 +286,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Fiesta de la Media Naranja/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -290,6 +295,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.danicrg.Fiesta-de-la-Media-Naranja";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -299,7 +305,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Fiesta de la Media Naranja/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -307,6 +314,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.danicrg.Fiesta-de-la-Media-Naranja";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
