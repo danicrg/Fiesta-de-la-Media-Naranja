@@ -13,30 +13,28 @@ class ViewController: UIViewController {
     @IBOutlet weak var birthDateButton: UIButton!
     @IBOutlet weak var startDateButton: UIButton!
     @IBOutlet weak var orangeLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     
-    @IBInspectable
-    var startDate: Date = Date.distantPast {
-        didSet {
-            computeOrange()
-        }
-    }
-    
-    @IBInspectable
-    var birthDate: Date = Date.distantFuture{
-        didSet {
-            computeOrange()
-        }
-    }
     
     var alertView: UIAlertController?
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let defaults = UserDefaults.standard
-        defaults.set(Date.init(), forKey: "startDate")
-        defaults.set(Date.init(), forKey: "birthDate")
-        defaults.synchronize()
         
+        if let startDate = defaults.object(forKey: "startDate") as? Date {
+            startDateButton.setTitle(displayDate(startDate), for: .normal)
+        } else {
+            defaults.set(Date.init(), forKey: "startDate")
+        }
+        
+        if let birthDate = defaults.object(forKey: "birthDate") as? Date {
+            birthDateButton.setTitle(displayDate(birthDate), for: .normal)
+        } else {
+            defaults.set(Date.init(), forKey: "birthDate")
+        }
+        
+        computeOrange()
     }
 
     @IBAction
@@ -44,9 +42,9 @@ class ViewController: UIViewController {
         
         if let rcv = segue.destination as? DateViewController {
             if segue.identifier == "start"{
-                rcv.dateType = "Start Date"
+                rcv.dateType = "Introduce la fecha de inicio de la relación"
             } else {
-                rcv.dateType = "Birth Date"
+                rcv.dateType = "Introduce la fecha de nacimiento"
             }
             
         }
@@ -55,36 +53,36 @@ class ViewController: UIViewController {
     @IBAction
     func getDate(_ segue: UIStoryboardSegue) {
         if let rcv = segue.source as? DateViewController {
-            let components = Calendar.current.dateComponents([.year, .month, .day], from: rcv.date.date)
-            if let day = components.day, let month = components.month, let year = components.year {
-                
-                if rcv.dateLabel.text == "Start Date" {
-                    startDateButton.setTitle("\(day)/\(month)/\(year)", for: .normal)
-                    startDate = rcv.date.date
-                } else {
-                    birthDateButton.setTitle("\(day)/\(month)/\(year)", for: .normal)
-                    birthDate = rcv.date.date
-                }
+            
+            if rcv.dateType == "startDate" {
+                startDateButton.setTitle(displayDate(rcv.date.date), for: .normal)
+            } else {
+                birthDateButton.setTitle(displayDate(rcv.date.date), for: .normal)
             }
+            computeOrange()
         }
     }
     
-    @IBAction
+    func displayDate(_ date: Date) -> String {
+        let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
+        if let day = components.day, let month = components.month, let year = components.year {
+            return "\(day)/\(month)/\(year)"
+        }
+        return ""
+    }
+    
     func computeOrange() {
+        let birthDate = defaults.object(forKey: "birthDate") as! Date
+        let startDate = defaults.object(forKey: "startDate") as! Date
         
-        if birthDate < startDate {
+        if birthDate < startDate && startDateButton.title(for: .normal) != "Elegir" && startDateButton.title(for: .normal) != "Elegir" {
             let difference = startDate.timeIntervalSince(birthDate)
             let orangeDate = startDate + difference
-            let components = Calendar.current.dateComponents([.year, .month, .day], from: orangeDate)
-            
-            if let day = components.day, let month = components.month, let year = components.year {
-            orangeLabel.text = "Tu fiesta de la naranja es el \(day)/\(month)/\(year)"
-            }
+            orangeLabel.text = "Tu fiesta de la naranja es el \(displayDate(orangeDate))"
+            imageView.isHidden = false
         } else {
             orangeLabel.text = "Introduce todas las fechas"
-            
-        }
-            
+            imageView.isHidden = true        }
     }
     
 }

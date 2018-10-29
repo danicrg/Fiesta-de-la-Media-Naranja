@@ -18,8 +18,9 @@ class DateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // I know its not pretty
         dateLabel.text = dateType
-        if dateType == "Start Date" { dateType = "startDate"} else { dateType = "birthDate"}
+        if (dateType == "Introduce la fecha de inicio de la relación") { dateType = "startDate"} else { dateType = "birthDate"}
         let defaults = UserDefaults.standard
         if let datetoset = defaults.object(forKey: dateType!) as? Date {
                 date.setDate(datetoset, animated: true)
@@ -29,30 +30,29 @@ class DateViewController: UIViewController {
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         let defaults = UserDefaults.standard
         
-        if dateType=="startDate" {
-            if date.date > defaults.object(forKey: "birthDate") as! Date{
-                defaults.set(date.date, forKey: dateType!)
-                defaults.synchronize()
-                return true
-            } else{
-                alert()
-                return false
-            }
-        } else {
-            if date.date < defaults.object(forKey: "startDate") as! Date {
-                defaults.set(date.date, forKey: "birthDate")
-                defaults.synchronize()
-                return true
+        if date.date <= Date.init(){
+            if dateType=="startDate" {
+                if date.date > defaults.object(forKey: "birthDate") as! Date{
+                    defaults.set(date.date, forKey: dateType!)
+                    defaults.synchronize()
+                    return true
+                }
             } else {
-                alert()
-                return false
+                if date.date < defaults.object(forKey: "startDate") as! Date {
+                    defaults.set(date.date, forKey: "birthDate")
+                    defaults.synchronize()
+                    return true
+                }
             }
+            alert("No has podido enamorarte antes de nacer!")
+            return false
         }
-        
+        alert("Introduce fechas del pasado!")
+        return false
     }
 
-    func alert(){
-        let alertView = UIAlertController(title: "Fechas incoherentes", message: "La cagaste",
+    func alert(_ message: String){
+        let alertView = UIAlertController(title: "Error", message: message,
                                           preferredStyle: .alert)
         alertView.addAction(UIAlertAction(title: "OK", style: .default))
         present(alertView, animated: true)
